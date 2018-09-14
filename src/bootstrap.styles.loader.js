@@ -55,13 +55,21 @@ module.exports = function() {
   const bootstrapStyles = processModules(styles, bootstrapVersion, bootstrapRelPath);
   const userStyles = appStyles ? createUserImport(appStyles, this) : '';
 
+<<<<<<< HEAD
   const stylesOutput = processedStyles
+=======
+  let stylesOutput = processedStyles
+>>>>>>> Support bootstrap namespaces
     .concat(bootstrapStyles, userStyles)
     .map(style => `${style.replace(/\\/g, '/')}\n`)
     .join('');
 
   if (styleNamespace){
+<<<<<<< HEAD
     const classSelector = styleNamespace.startsWith('.') ? 
+=======
+    let classSelector = styleNamespace.startsWith('.') ? 
+>>>>>>> Support bootstrap namespaces
                 styleNamespace : '.' + styleNamespace;
     stylesOutput = `${classSelector} {
       ${stylesOutput}
