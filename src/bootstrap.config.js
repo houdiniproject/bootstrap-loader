@@ -137,5 +137,6 @@ export default function createConfig({
     styles: selectUserModules(userConfig.styles, defaultConfig.styles),
     scripts: selectUserModules(userConfig.scripts, defaultConfig.scripts),
     configFilePath,
+    styleNamespace: userConfig.styleNamespace
   };
 }

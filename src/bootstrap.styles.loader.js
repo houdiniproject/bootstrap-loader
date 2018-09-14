@@ -25,6 +25,7 @@ module.exports = function() {
     preBootstrapCustomizations,
     bootstrapCustomizations,
     appStyles,
+    styleNamespace,
   } = config;
 
   const processedStyles = [];
@@ -70,12 +71,18 @@ module.exports = function() {
     appStyles ? createUserImport(appStyles, this) : ''
   );
 
-  const stylesOutput = (
-    processedStyles
-      .concat(bootstrapStyles, userStyles)
-      .map(style => `${style.replace(/\\/g, '/')}\n`)
-      .join('')
-  );
+  let stylesOutput = processedStyles
+    .concat(bootstrapStyles, userStyles)
+    .map(style => `${style.replace(/\\/g, '/')}\n`)
+    .join('');
+
+  if (styleNamespace){
+    let classSelector = styleNamespace.startsWith('.') ? 
+                styleNamespace : '.' + styleNamespace;
+    stylesOutput = `${classSelector} {
+      ${stylesOutput}
+    }`;
+  }
 
   logger.debug('Styles output:', '\n', stylesOutput);
 
