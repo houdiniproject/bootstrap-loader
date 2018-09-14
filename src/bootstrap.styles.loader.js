@@ -25,6 +25,7 @@ module.exports = function() {
     preBootstrapCustomizations,
     bootstrapCustomizations,
     appStyles,
+    styleNamespace,
   } = config;
 
   const processedStyles = [];
@@ -58,6 +59,14 @@ module.exports = function() {
     .concat(bootstrapStyles, userStyles)
     .map(style => `${style.replace(/\\/g, '/')}\n`)
     .join('');
+
+  if (styleNamespace){
+    const classSelector = styleNamespace.startsWith('.') ? 
+                styleNamespace : '.' + styleNamespace;
+    stylesOutput = `${classSelector} {
+      ${stylesOutput}
+    }`;
+  }
 
   logger.debug('Styles output:', '\n', stylesOutput);
 
