@@ -128,6 +128,6 @@ export default function createConfig({ extractStyles, customConfigFilePath }) {
     styles: selectUserModules(userConfig.styles, defaultConfig.styles),
     scripts: selectUserModules(userConfig.scripts, defaultConfig.scripts),
     configFilePath,
-    styleNamespace: userConfig.styleNamespace
+    styleNamespace: userConfig.styleNamespace,
   };
 }
